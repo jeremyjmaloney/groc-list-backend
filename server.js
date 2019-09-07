@@ -28,6 +28,12 @@ itemRoutes.route.get('/', (req, res) => {
   });
 });
 
+itemRoutes.route.get('/:id', (req, res) => {
+  Item.findById(req.params.id, (error, foundItem) => {
+    res.json(foundItem);
+  });
+});
+
 app.listen(PORT, ()=> {
   console.log(`Server is running on port ${PORT}`);
 });
