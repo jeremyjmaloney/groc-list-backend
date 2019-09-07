@@ -20,32 +20,29 @@ connection.once('open', ()=> {
 const itemRoutes = express.Router();
 app.use('/items', itemRoutes);
 
-itemRoutes.route.get('/', (req, res) => {
-  Item.find({}, (error, items) {
-    if(error) {
-      console.log(error);
-    } else {
-      res.json(items);
-    };
-  });
+itemRoutes.route('/').get((req, res) => {
+    Item.find({}, (err, items) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(items);
+        }
+    });
 });
 
-itemRoutes.route.get('/:id', (req, res) => {
+itemRoutes.route('/:id').get((req, res) => {
   Item.findById(req.params.id, (error, foundItem) => {
     res.json(foundItem);
   });
 });
 
-itemRoutes.route.post('/add', (req, res) => {
+itemRoutes.route('/add').post((req, res) => {
   Item.create(req.body, (error, createdItem) => {
-    res.status(200).json({
-      status: 200,
-      message: 'created item'
-    });
+    res.status(200).json(createdItem);
   });
 });
 
-itemRoutes.route.post('/update/:id', (req, res) => {
+itemRoutes.route('/update/:id').post((req, res) => {
   Item.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedItem) => {
     res.json(updatedItem);
   });
