@@ -15,6 +15,19 @@ connection.once('open', ()=> {
   console.log('Connected to the Mongodb database...');
 });
 
+const itemRoutes = express.Router();
+app.use('/items', itemRoutes);
+
+itemRoutes.route.get('/', (req, res) => {
+  Item.find({}, (error, items) {
+    if(error) {
+      console.log(error);
+    } else {
+      res.json(items);
+    };
+  });
+});
+
 app.listen(PORT, ()=> {
   console.log(`Server is running on port ${PORT}`);
 });
