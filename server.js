@@ -54,6 +54,12 @@ itemRoutes.route('/:id').delete((req, res) => {
   });
 });
 
+itemRoutes.route('/').delete((req, res) => {
+  Item.deleteMany({}, (error, deletedList) => {
+    res.json(deletedList);
+  });
+});
+
 app.listen(PORT, ()=> {
   console.log(`Server is running on port ${PORT}`);
 });
