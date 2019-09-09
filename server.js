@@ -51,8 +51,8 @@ itemRoutes.route('/update/:id').post((req, res) => {
 itemRoutes.route('/:id').delete((req, res) => {
   Item.findByIdAndRemove(req.params.id, (error, deletedItem) => {
     res.json(deletedItem);
-  })
-})
+  });
+});
 
 app.listen(PORT, ()=> {
   console.log(`Server is running on port ${PORT}`);
