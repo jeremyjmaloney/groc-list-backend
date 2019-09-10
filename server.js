@@ -7,8 +7,7 @@ const db = mongoose.connection;
 const Item = require('./models/items.js');
 
 const PORT = process.env.PORT || 4000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/items';
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/items';
 
 db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 db.on('disconnected', () => console.log('mongo disconnected'));
@@ -57,4 +56,7 @@ itemRoutes.route('/').delete((req, res) => {
 
 app.listen(PORT, ()=> {
   console.log(`Server is running on port ${PORT}`);
+});
+mongoose.connect(mongoURI, {useNewUrlParser:true}, () => {
+  console.log('MongoDB connection established');
 });
