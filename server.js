@@ -3,19 +3,19 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const PORT = 4000;
-
+const db = mongoose.connection;
+require('dotenv').config();
 const Item = require('./models/items.js');
+
+const PORT = process.env.PORT || 4000;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/items';
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
+
+db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
+db.on('disconnected', () => console.log('mongo disconnected'));
 
 app.use(cors());
 app.use(bodyParser.json());
-
-mongoose.connect('mongodb://127.0.0.1:27017/items', {useNewUrlParser: true});
-const connection = mongoose.connection;
-
-connection.once('open', ()=> {
-  console.log('Connected to the Mongodb database...');
-});
 
 const itemRoutes = express.Router();
 app.use('/items', itemRoutes);

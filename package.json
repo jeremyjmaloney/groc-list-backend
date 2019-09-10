@@ -1,6 +1,9 @@
 {
   "name": "groc-list-backend",
   "version": "1.0.0",
+  "engines": {
+    "node": "11.12.0"
+  },
   "description": "Back end for groc-list",
   "main": "server.js",
   "scripts": {
