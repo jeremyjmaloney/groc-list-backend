@@ -9,7 +9,7 @@ const Item = require('./models/items.js');
 const PORT = process.env.PORT || 4000;
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/items';
 
-db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
+db.on('connected', () => console.log('mongo connected'));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
 app.use(cors());
