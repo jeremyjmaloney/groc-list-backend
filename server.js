@@ -20,13 +20,9 @@ const itemRoutes = express.Router();
 app.use('/items', itemRoutes);
 
 itemRoutes.route('/').get((req, res) => {
-    Item.find({}, (err, items) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(items);
-        }
-    });
+  Item.find({}, (err, items) => {
+    res.json(items);
+  });
 });
 
 itemRoutes.route('/:id').get((req, res) => {
