@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const db = mongoose.connection;
-require('dotenv').config();
 const Item = require('./models/items.js');
 
 const PORT = process.env.PORT || 4000;
